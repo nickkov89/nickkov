@@ -9,6 +9,6 @@ def index(request):
 
  
 def detail(request, entry_id):
-	entry = get_object_or_404(Entry, pk=entry_id)
 	latest_entries = Entry.objects.filter(is_active=1).order_by('-pub_date')[:5]
+	entry = get_object_or_404(Entry, pk=entry_id)
 	return render_to_response('thoughts/detail.html', {'entry':entry, 'latest_entries':latest_entries}, context_instance=RequestContext(request))

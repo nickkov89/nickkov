@@ -12,11 +12,14 @@
 
 			
 			<div class="padding span-16 append-2">
-						
+				<div class="post">
+						<h2 class="post-title">{{entry.title}}</h2> 
+						<h3 class="post-date">{{entry.pub_date}}</h3>
+						{% autoescape off %}
+							<p class="content">{{entry.content}}</p>				
+						{% endautoescape %}
+				</div>
 			</div>
 
 			{% include "thoughts/partials/recent_posts.html" %}
-
-		</div>
-
-	{% include "thoughts/partials/footer.html" %}
+			{% include "thoughts/partials/footer.html" %}
