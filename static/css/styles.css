@@ -263,6 +263,16 @@ input:focus, textarea:focus {
 	font-weight: 300;	
 }
 
+.post a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+
+.post a:hover {
+	color:#463E3F;
+}
+
 .center {
    position: absolute;
    top: 50%;
@@ -277,11 +287,11 @@ input:focus, textarea:focus {
    position:absolute;
    bottom:0;
    width:950px;
-   height:90px;   /* Height of the footer */
+   height:80px;   /* Height of the footer */
 }
 
 .footer img {
-	height:50px;
+	height:30px;
 }
 
 .footer h1 {

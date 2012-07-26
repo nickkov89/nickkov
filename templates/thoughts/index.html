@@ -16,7 +16,7 @@
 						<h2 class="post-title">{{entry.title}}</h2> 
 						<h3 class="post-date">{{entry.pub_date}}</h3>
 						{% autoescape off %}
-							<p class="content">{{entry.content|truncatewords:200}}</p>				
+							<p class="content">{{entry.content|truncatewords:80}} <a href="{% url thoughts.views.detail entry.id %}">Read more</a> </p>				
 						{% endautoescape %}
 					</div>
 				{% endfor %}
