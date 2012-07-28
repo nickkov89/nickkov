@@ -1,3 +1,4 @@
+
 body{
 	margin:0;
 	background:url(../images/bg-body.jpg);
@@ -234,6 +235,7 @@ input:focus, textarea:focus {
 
 #recent-posts li {
 	list-style-type: none;
+	padding-bottom: 8px;
 }
 
 #recent-posts li a {
