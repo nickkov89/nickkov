@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		{% include "dormroof/partials/includes.html" %}
+	</head>
+
+	<body>
+		<div class="container page">
+				<div class="span-24">
+					<a href="{% url dormroof.views.logout %}">Logout</a>
+
+					{% for user in users %}
+						<a href="{{ user.get_absolute_url }}">{{user.user.first_name}}</a>
+					{% endfor %}
+
+				</div>
+
+		</div>
+
+	{% include "trackme/partials/footer.html" %}
+
+
+
+
