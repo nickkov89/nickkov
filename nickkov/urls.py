@@ -7,5 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^thoughts/', include('thoughts.urls')),
     url(r'^trackme/', include('trackme.urls')),
+    url(r'^dormroof/', include('dormroof.urls')),
+    url(r'^tweetplay/', include('tweetplay.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

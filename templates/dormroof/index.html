@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		{% include "dormroof/partials/includes.html" %}
+	</head>
+
+	<body>
+		<div class="container page">
+				<div class="span-24">
+						
+					Welcome {{user_info.user.username}}
+
+					<a href="{% url dormroof.views.browse %}">See who lives in your building!</a>
+
+					<a href="{% url dormroof.views.logout %}">Logout</a>
+				</div>
+
+		</div>
+
+	{% include "trackme/partials/footer.html" %}
+
+
+
+
