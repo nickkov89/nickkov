@@ -8,7 +8,7 @@ class Entry(models.Model):
 	content = models.TextField()
 	is_active = models.BooleanField(default=0)
 	pub_date = models.DateTimeField(auto_now=True, auto_now_add=True)
-	slug = models.SlugField(null=True)
+	slug = models.SlugField(max_length=200, null=True)
 
 	def __unicode__(self):
 		return self.content
