@@ -15,7 +15,22 @@ def checkForTwitterFDW():
 	cursor = connection.cursor()
 	cursor.execute('create extension twitter_fdw')
 
+def getLast15():
+	cursor = connection.cursor()
 
+	cursor.execute('SELECT from_user, \
+	created_at, \
+	text \
+	FROM twitter WHERE q=%s and from_user=%s \
+	limit 1',
+	['bpm_playlist','bpm_playlist'])
+	
+	rawResults = cursor.fetchall()
+	returnResults = []
+	for i in rawResults:
+		returnResults.append(i[2].partition(' playing ')[0])
+
+	return returnResults
 
 def insertAndReturnRecentSong():
 	#checkForTwitterFDW()

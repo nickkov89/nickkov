@@ -11,7 +11,7 @@
 			<div class="padding span-16 append-2">
 				<div class="span-24">
 					<div id="contact">
-						<form action="{% url dormroof.views.login %}" method="post">
+						<form action="{% url dormroof.views.login %}" method="POST">
 							{% csrf_token %}
 							<fieldset>
 								<label for="username">Username:</label>

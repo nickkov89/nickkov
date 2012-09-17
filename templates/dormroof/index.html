@@ -10,13 +10,17 @@
 		<div class="container page">
 				<div class="span-24">
 						
-					Welcome {{user_info.user.username}}
+					Welcome {{user_info.user.first_name}}
 
 					<a href="{% url dormroof.views.browse %}">See who lives in your building!</a>
-
+					</br>
 					<a href="{% url dormroof.views.logout %}">Logout</a>
-				</div>
+					</br>
 
+				</div>
+		{% if user_info.is_ra == 1 %}
+			<a href= "{% url dormroof.views.manage %}">Manage your floor</a>	
+		{% endif %}
 		</div>
 
 	{% include "trackme/partials/footer.html" %}

@@ -8,4 +8,9 @@ urlpatterns=patterns('dormroof.views',
     url(r'^logout/$','logout'),
     url(r'^browse/$','browse'),
     url(r'^user/(?P<user_id>\d+)/$', 'user',name="user"),
+    url(r'^manage/$', 'manage'),
+    url(r'^sendMessage/$', 'sendMessage'),
+    url(r'^sendEvent/$', 'sendEvent'),
+    url(r'^sendEmail/$', 'sendEmail'),
+
 )
