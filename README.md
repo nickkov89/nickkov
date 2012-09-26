@@ -32,3 +32,11 @@ I don't really care to add these features since this app was built mainly to sho
 foreign data wrapper function is. Perhaps in the future when I have more time, I'll add a history and present
 a proper fix for the potential problems.  
 
+DormRoof
+=======
+
+A work in progress. An RA administration/Student dorm network tool. 
+
+Models are more or less all set up, the frontend is completely missing since I am not a huge fan of it.
+
+Also, migrated into it's own repo (dormpad) recently in order to convert to better Djano practices.
