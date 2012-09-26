@@ -39,4 +39,4 @@ A work in progress. An RA administration/Student dorm network tool.
 
 Models are more or less all set up, the frontend is completely missing since I am not a huge fan of it.
 
-Also, migrated into it's own repo (dormpad) recently in order to convert to better Djano practices.
+Also, migrated into it's own repo (dormpad) recently in order to convert to better Django practices.
