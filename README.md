@@ -4,7 +4,7 @@ www.nickkov.com
 Built with Django, running on Nginx+Gunicorn 
 
 
-TweetPlay
+TweetPlay (www.nickkov.com/tweetplay)
 =======
 Built on top of Postgres
 
