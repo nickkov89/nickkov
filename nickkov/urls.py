@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'^trackme/', include('trackme.urls')),
     url(r'^dormroof/', include('dormroof.urls')),
     url(r'^tweetplay/', include('tweetplay.urls')),
+    url(r'^mapit/', include('mapit.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

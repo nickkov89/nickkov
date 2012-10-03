@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		{% include "mapit/partials/includes.html" %}
+	</head>
+
+	<body>
+		<div class="container page">
+			{% include "mapit/partials/header.html" %}
+
+			{% for result in results %}
+				{{result.title}}
+				<br/>
+			{% endfor %}
+			
+			{% include "thoughts/partials/footer.html" %}

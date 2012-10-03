@@ -11,29 +11,8 @@ class TweetInfo(models.Model):
 		return "from: " + self.from_user + ":    " + self.text
 
 
-def checkForTwitterFDW():
-	cursor = connection.cursor()
-	cursor.execute('create extension twitter_fdw')
-
-def getLast15():
-	cursor = connection.cursor()
-
-	cursor.execute('SELECT from_user, \
-	created_at, \
-	text \
-	FROM twitter WHERE q=%s and from_user=%s \
-	limit 1',
-	['bpm_playlist','bpm_playlist'])
-	
-	rawResults = cursor.fetchall()
-	returnResults = []
-	for i in rawResults:
-		returnResults.append(i[2].partition(' playing ')[0])
-
-	return returnResults
 
 def insertAndReturnRecentSong():
-	#checkForTwitterFDW()
 	cursor = connection.cursor()
 	cursor.execute('SELECT from_user, created_at, text \
 	FROM twitter \
@@ -52,6 +31,6 @@ def insertAndReturnRecentSong():
 	a = TweetInfo.objects.latest('created_at')
 	#splits the tweet 
 	#this is assuming that every tweet has been following the same format ('author - songname playing on #BPM')
-	#could easily break assuming the tweet format has changed
+	#could break assuming the tweet format has changed
 	partition = a.text.partition(' playing ')
 	return partition[0]
