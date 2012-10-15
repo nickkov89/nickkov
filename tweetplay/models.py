@@ -1,5 +1,5 @@
 from django.db import models
-from django.db import connection, transaction
+from django.db import connection, connections, transaction
 from django.db import DatabaseError
 
 class TweetInfo(models.Model):
@@ -13,7 +13,7 @@ class TweetInfo(models.Model):
 
 
 def insertAndReturnRecentSong():
-	cursor = connection.cursor()
+	cursor = connections['postgres'].cursor()
 	cursor.execute('SELECT from_user, created_at, text \
 	FROM twitter \
 	WHERE q=%s and from_user=%s \
@@ -21,14 +21,14 @@ def insertAndReturnRecentSong():
 	['bpm_playlist','bpm_playlist'])
 	live_row = cursor.fetchone()
 
-	a = TweetInfo.objects.latest('created_at')
+	a = TweetInfo.objects.using('postgres').latest('created_at')
 	
 	#checks whether there's a newer tweet 
 	if (live_row[1] > a.created_at):
 		insert = TweetInfo(from_user=live_row[0], created_at=live_row[1], text=live_row[2])
-		insert.save()
+		insert.save(using='postgres')
 
-	a = TweetInfo.objects.latest('created_at')
+	a = TweetInfo.objects.using('postgres').latest('created_at')
 	#splits the tweet 
 	#this is assuming that every tweet has been following the same format ('author - songname playing on #BPM')
 	#could break assuming the tweet format has changed

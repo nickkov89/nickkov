@@ -9,4 +9,4 @@ def index(request):
 	song = urllib.urlencode({'q':insertAndReturnRecentSong()})
 	result = urllib2.urlopen('https://gdata.youtube.com/feeds/api/videos?'+song+'&max-results=3&alt=json')
 	content = result.read()
-	return render_to_response('tweetplay/index.html', {"content":content,'songs':historyResults}, context_instance=RequestContext(request))
+	return render_to_response('tweetplay/index.html', {"content":content}, context_instance=RequestContext(request))
