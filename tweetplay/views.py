@@ -8,5 +8,8 @@ import json
 def index(request):
 	song = urllib.urlencode({'q':insertAndReturnRecentSong()})
 	result = urllib2.urlopen('https://gdata.youtube.com/feeds/api/videos?'+song+'&max-results=3&alt=json')
+
 	content = result.read()
-	return render_to_response('tweetplay/index.html', {"content":content}, context_instance=RequestContext(request))
+	last15 = getLatestSongs(15)
+
+	return render_to_response('tweetplay/index.html', {"content":content, "last15":last15}, context_instance=RequestContext(request))
