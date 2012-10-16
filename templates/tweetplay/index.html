@@ -44,7 +44,7 @@
 					<h2 id="played-button">Previously Played</h2>	
 					<div id="history" style="position:absolute;z-index:1;">
 						<ul>
-							{% for song in last15 %}
+							{% for song in last10 %}
 								<li><a href="http://www.youtube.com/results?search_query={{song}}">{{song|truncatechars:35}}</a></li>
 							{% endfor %}
 						</ul>

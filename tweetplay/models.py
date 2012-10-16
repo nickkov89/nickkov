@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import connections
 from django.db import DatabaseError
+import HTMLParser
 
 class TweetInfo(models.Model):
 	from_user = models.CharField(max_length=20)
@@ -22,7 +23,7 @@ def getLatestSongs(num):
 	rows = cursor.fetchall()
 	partitioned_list = []
 	for row in rows:
-		partitioned_list.append(row[0].partition(' playing ')[0])
+		partitioned_list.append(HTMLParser.HTMLParser().unescape(row[0].partition(' playing ')[0]))
 
 	return partitioned_list
 
