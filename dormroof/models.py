@@ -2,18 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Q
 
-class Message(models.Model):
-	title = models.CharField(max_length=300)
-	content = models.TextField()
-	is_active = models.BooleanField(default=0)
-	importance_level = models.IntegerField()
-	pub_date = models.DateTimeField(auto_now=True, auto_now_add=True)
-	slug = models.SlugField(null=True)
-
-class Event(Message):
-	where = models.CharField(max_length=60)
-	when = models.DateField()
-
 class University(models.Model):
 	name = models.CharField(max_length=50)
 	is_active = models.BooleanField(default=0)
@@ -57,7 +45,7 @@ class UserProfile(models.Model):
 
 	def getRA(self):
 		if self.is_ra == 0:
-			return self.belongs_to.user.username
+			return self.belongs_to.user.id
 		else:
 			return 0
 
@@ -71,6 +59,27 @@ class UserProfile(models.Model):
 	@models.permalink
 	def get_absolute_url(self):
 		return ('user', (), {'user_id': self.id,})
+
+	#returns all messages by RA
+	def getEventsByRA(self, limit):
+		return Event.objects.filter(posted_by = self.getRA())[:limit]
+
+class Message(models.Model):
+	title = models.CharField(max_length=300)
+	content = models.TextField()
+	is_active = models.BooleanField(default=0)
+	importance_level = models.IntegerField()
+	pub_date = models.DateTimeField(auto_now=True, auto_now_add=True)
+	slug = models.SlugField(null=True)
+	to = models.ForeignKey(UserProfile, null=True)
+	posted_by = models.ForeignKey(UserProfile, null=True, related_name='from')
+
+class Event(Message):
+	where = models.CharField(max_length=60)
+	when = models.DateField()
+
+	def __unicode__(self):
+		return self.title
 
 class Infraction(models.Model):
 	type = models.CharField(max_length=25)

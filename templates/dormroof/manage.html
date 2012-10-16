@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		{% include "dormroof/partials/includes.html" %}
+	</head>
+
+	<body>
+		<div class="container page">
+			<div class="padding span-16 append-2">
+				<div class="span-24">
+					<div id="contact">
+						<form action="{% url dormroof.views.sendEmail %}" method="POST">
+							{% csrf_token %}
+							<fieldset>
+								<label for="user_id">To:</label>
+								<input name="user_id" type="text" id="username" placeholder="To:" />
+
+								<label for="when">When:</label>
+								<input name="when" type="text" id="username" placeholder="When:" />
+
+								<label for="where">Where:</label>
+								<input name="where" type="text" id="username" placeholder="Where:" />
+								
+								<label for="message">Message:</label>
+								<input style="height:150px" name="message" type="text" id="text" placeholder="Message:" />
+								
+								<input type="submit" value="Send" />
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	{% include "trackme/partials/footer.html" %}

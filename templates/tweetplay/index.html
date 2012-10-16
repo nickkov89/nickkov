@@ -10,75 +10,91 @@
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css" type="text/css" media="screen, projection" /> 
 		<script type="text/javascript" src="http://use.typekit.com/wjy7ars.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<script type="text/javascript" src="{{ STATIC_URL }}js/underscore-min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript">
 			var feed = {{content|safe}};
-			var song = feed['feed']['entry'][0]['link'][0]['href'];
-			var song2 = feed['feed']['entry'][1]['link'][0]['href'];
-			var song3 = feed['feed']['entry'][2]['link'][0]['href'];
-			song = song.replace('watch?v=','v/');
-			song2 = song2.replace('watch?v=','v/');
-			song3 = song3.replace('watch?v=','v/');
+			
+			var song = feed['feed']['entry'][0]['link'][0]['href'].replace('watch?v=','v/');
+			var song2 = feed['feed']['entry'][1]['link'][0]['href'].replace('watch?v=','v/');
+			var song3 = feed['feed']['entry'][2]['link'][0]['href'].replace('watch?v=','v/');
+			
+			$(function(){
+				$('#history').hide();
+				$('#played-button').click(function(){
+					$(this).next().slideToggle("fast");
+				}).mouseover(function(){
+					$(this).css("cursor","pointer");
+				});
+			});
+
 		</script>
 	</head>
 
 	<body>
 		<div class="container">
-			<script type="text/javascript" src="{{STATIC_URL}}swfobject.js"></script>    
+			<script type="text/javascript" src="{{STATIC_URL}}js/swfobject.js"></script>    
 		 	
 		 	<div class="span-24">
 		 		<h1 style="text-align:center">TweetPlay -- @bpm_playlist</h1>
 		 	</div>
 
-		 	<div id="ytapiplayer" class="span-24">
-		 		You need Flash player 8+ and JavaScript enabled to view this video.
-		 	</div>
+			<div class="span-24">
+				<div class="prepend-19 span-5 last">
+					<h2 id="played-button">Previously Played</h2>	
+					<div id="history" style="position:absolute;z-index:1;">
+						<ul>
+							{% for song in last15 %}
+								<li><a href="http://www.youtube.com/results?search_query={{song}}">{{song|truncatechars:35}}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+
 
 			<script type="text/javascript">
+			    
+				    var params = { allowScriptAccess: "always",'wmode' : 'transparent' };
+				    var atts = { id: "myytplayer" };
+				    
+				    swfobject.embedSWF(song+"&enablejsapi=1&playerapiid=ytplayer&version=3",
+				                       "ytapiplayer", "950", "600", "8", null, null, params, atts);
+				    swfobject.embedSWF(song2+"&enablejsapi=1&playerapiid=ytplayer2&version=3",
+				                       "ytapiplayer2", "472", "300", "8", null, null, params, atts);
+				    swfobject.embedSWF(song3+"&enablejsapi=1&playerapiid=ytplayer3&version=3",
+				                       "ytapiplayer3", "475", "300", "8", null, null, params, atts);
 
-			    var params = { allowScriptAccess: "always" };
-			    var atts = { id: "myytplayer" };
-			    swfobject.embedSWF(song+"&enablejsapi=1&playerapiid=ytplayer&version=3",
-			                       "ytapiplayer", "950", "600", "8", null, null, params, atts);
-			    swfobject.embedSWF(song2+"&enablejsapi=1&playerapiid=ytplayer&version=3",
-			                       "ytapiplayer2", "472", "300", "8", null, null, params, atts);
-			    swfobject.embedSWF(song3+"&enablejsapi=1&playerapiid=ytplayer&version=3",
-			                       "ytapiplayer3", "475", "300", "8", null, null, params, atts);
+					function onYouTubePlayerReady(playerId) {
+		      			ytplayer = document.getElementById("myytplayer");
+		      			ytplayer2 = document.getElementById("myytplayer2");
+		      			ytplayer3 = document.getElementById("myytplayer3");
 
+		      			ytplayer.playVideo();
+		    		 	ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
+		    		 	ytplayer2.addEventListener("onStateChange", "onytplayerStateChange");
+		    		 	ytplayer3.addEventListener("onStateChange", "onytplayerStateChange");
+		    		}
 
-				function onYouTubePlayerReady(playerId) {
-	      			ytplayer = document.getElementById("myytplayer");
-	      			ytplayer.playVideo();
-	    		 	ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
-	    		}
-
-	    		function onytplayerStateChange(newState) {
-	   				if (newState==0) {
-	   					document.location.reload(true);
-	   				}
-				}
-
+		    		function onytplayerStateChange(newState) {
+		   				if (newState==0) {
+		   					document.location.reload(true);
+		   				}
+					}
 			</script>
 
+			<div id='ytapiplayer' class="span-24"></div>
+
 			<div class="span-24">
+
 				<h2 style="padding:5px 0 5px 0;margin:0;text-align:center;">Not the right song? Here's a few more: </h2>
 				
 				<div id="ytapiplayer2" class="span-12"></div>
 
-				<div id="ytapiplayer3" class="span-12 last"></div>
+				<div id="ytapiplayer3" class="span-12 last"></div>	
 
 			</div>
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 	</body>
 </html>
