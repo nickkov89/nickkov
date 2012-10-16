@@ -1,3 +1,4 @@
+
 body{
 	margin:0;
 	background:url(../images/bg-body.jpg);
@@ -130,6 +131,7 @@ body{
 
 #recent-posts li {
 	list-style-type: none;
+	padding-bottom: 8px;
 }
 
 #recent-posts li a {
